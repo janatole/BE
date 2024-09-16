@@ -1,0 +1,67 @@
+1. Creation
+
+1.1. Technology used
+Streamlit: Chosen for its simplicity and fast deployment capabilities. Streamlit allows building interactive web apps quickly and provides an intuitive API for UI creation.
+Python: Used for logic, session management, and data handling.
+Trading Platform API (Concept): While a real trading API (like Trading 212’s) would be used in production, I simulated the API integration in this phase to focus on UI functionality and session management.
+1.2. Key Components of the Application
+User Authentication via API Key Submission:
+Implemented a simple form in the sidebar where users can submit their trading platform API key.
+Once authenticated, users gain access to the dashboard to view their trades and rankings.
+Managed API keys and user sessions using st.session_state.
+Session Management:
+Added functionality to create and join multiple sessions.
+Each session maintains separate data (rankings, trades, holdings).
+The sessions dictionary stores the data for each session, allowing different groups to trade concurrently.
+Fetching and Displaying Player Data:
+I created placeholder functions (fetch_player_data()) to simulate pulling data from a trading platform API. In a real-world scenario, this function would make requests to the external API to fetch real-time data.
+Implemented tables to display player rankings, individual trades, and current holdings using st.table() and st.line_chart() for visualizing changes in PnL and rankings.
+User Interface (UI):
+Streamlit’s sidebar was used for session management and user authentication.
+The main page displays player data including:
+Rankings View: Display player rankings based on earnings.
+Trades View: Show individual trades of each player.
+Holdings View: Display each player's current holdings and their values.
+
+
+2. Research conducted
+
+2.1. Streamlit Functionality
+I had to explore the core functionalities of Streamlit, including:
+
+Dynamic Pages: Using st.selectbox and conditional statements to navigate between different pages (Landing Page, Rankings View, Trade View, etc.).
+Session Management: I had to learn how to store and manage session data using st.session_state to keep track of user sessions and handle multi-session support.
+Stateful Components: Ensuring that user inputs like API keys and session selections persist across page reloads.
+2.2. Simulating API Integration
+Since I wasn't working directly with the Trading 212 API during development, I needed to simulate how I would fetch real-time data from a trading platform API. This involved:
+
+API Requests: I studied the Trading 212 API documentation and looked at how REST APIs work for securely fetching and displaying data.
+Handling API Keys: Researching how to securely handle API keys in the front-end, including encrypting and securely transmitting them to avoid leaks.
+2.3. Session Handling for Multiple Users
+I explored how to handle multiple sessions for different players:
+
+Session Isolation: Ensuring that the data for one session does not interfere with another session. This led me to use a dictionary structure (sessions) to track rankings, trades, and holdings separately for each session.
+Multi-User Support: I researched how to maintain different user sessions using st.session_state, so that user inputs (e.g., API keys, session choices) persist.
+
+
+3. Possible Improvements
+
+3.1. Real API Integration
+Improvement: Replace the placeholder fetch_player_data() function with actual API calls to the Trading 212 API (or another trading platform API).
+Reason: Currently, the app simulates data. Once integrated with a live trading platform, users will be able to view their actual trades and performance in real time.
+Action: Implement OAuth 2.0 or API key-based authentication for securely fetching and displaying user-specific trading data.
+3.2. Data Security Enhancements
+Improvement: Implement data encryption for API keys and personal information.
+Reason: The API keys are critical pieces of sensitive information, so encrypting them and ensuring secure transmission between the frontend and backend will prevent potential data breaches.
+Action: Use secure storage options like encrypted environment variables or databases with encryption-at-rest and implement HTTPS to secure data transmission.
+3.3. Enhanced Visualisations
+Improvement: Add more advanced and real-time visualisations for the trades and PnL data.
+Reason: Advanced charts (e.g., candlestick charts, moving averages) would provide traders with more meaningful insights into their trading performance.
+Action: Leverage plotly or matplotlib to add more interactive charts that can track stock prices, trade performance, and risk analysis in real-time.
+3.4. Improved Multi-Session Features
+Improvement: Add session-based leaderboards with historical performance tracking.
+Reason: This will make the application more competitive and engaging, allowing users to compare their performance not only within a session but across multiple sessions.
+Action: Create a database to store session histories, rankings, and PnL over time, making the leaderboard dynamic.
+3.5. Deployment on a Scalable Platform
+Improvement: Deploy the application on a platform with better scalability options such as Heroku or AWS
+Reason: Streamlit Cloud offers quick deployment but may not handle scaling well if the application grows. A more robust platform would allow more concurrent users and sessions.
